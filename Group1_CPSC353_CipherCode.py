@@ -6,7 +6,7 @@ Input: the message and key containing only letters and spaces (will fail gracefu
 Output: the encrypted message and the key (with some words labeling each)
 
 """
-def oneTimePadEncr(message_input, key_input):
+def one_time_pad_encr(message_input, key_input):
     
     # Frist we make sure that the lengths of the message and key match
     length = len(message_input)     # We will use this later so it gets its own variable
@@ -78,7 +78,7 @@ Input: the encrypted message and key containing only letters and spaces (will fa
 Output: the decrypted message
 
 """
-def oneTimePadDecr(encr_mess, key):
+def one_time_pad_decr(encr_mess, key):
     # Change the input encryption message into a list of characters
     encr = []
     encr[:0] = encr_mess
@@ -128,8 +128,8 @@ def oneTimePadDecr(encr_mess, key):
 # My personal testing. Feel free to delete or change. 
 message = input("Write message: ")
 key = input("Write key of the same length as the message: ")
-print(oneTimePadEncr(message, key))
+print(one_time_pad_encr(message, key))
 
 decryption = input("Encrypted Message: ")
 key = input("Key: ")
-print("The message is: " + oneTimePadDecr(decryption, key))
+print("The message is: " + one_time_pad_decr(decryption, key))
