@@ -60,7 +60,7 @@ Output: the decrypted message
 
 """
 def one_time_pad_decr(encr_mess, key_in):
-    # Change the input encryption message into a list of characters. Will capitalize the lower case letters.
+    # Change the input encryption message into a list of characters
     encr = convertToList(encr_mess)
     if encr == None:
         return None
@@ -69,7 +69,7 @@ def one_time_pad_decr(encr_mess, key_in):
     key = convertToList(key_in)
     if key == None:
         return None
-
+    
     # initialize our descryption list
     decr = []
     
