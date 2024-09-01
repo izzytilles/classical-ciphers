@@ -3,35 +3,71 @@ def get_mode_choice(mode_type):
     if mode_type == "E":
         print("Please enter 1 for the caesar cipher, 2 for vigenere, and 3 for one time pad.")
         cipher_type = input()
-        get_choice_encrypt(cipher_type)
+        encrypted_message = get_choice_encrypt(cipher_type) 
+        return encrypted_message
     elif mode_type == "D":
+        print("Please enter 1 for the caesar cipher, 2 for vigenere, and 3 for one time pad.")
+        cipher_type = input()
         print("Enter the message you would like to decrypt.")
         message_decrypt = input()
         print("Enter the key")
-        decrpyt_key = input()
-        get_choice_encrypt(cipher_type)
+        key_decrypt = input()
+        decrypt_message = get_choice_decrypt(cipher_type, message_decrypt, key_decrypt)
+        return decrypt_message
     else:
         print("Please write a valid input E or D.")
         mode_type= input()
         get_mode_choice(mode_type)
 
-# choice decrypt needs to get fininished, but rest of framework is 
 def get_choice_encrypt(cipher_type):
-    print("in function encrypt")
     if cipher_type == "1":
-        return "one works"
+        return "one works" + cipher_type
     elif cipher_type == "2":
-        return "two works"
+        return "two works" + cipher_type
     elif cipher_type == "3":
-        print("Enter the message you would like to encyprt.")
+        print("Enter the message you would like to encrypt.")
         message_input = input()
         print("Enter the key you want to use")
         one_pad_key = input()
-        one_time_pad_encr(message_input, one_pad_key)
+        one_pad_string = one_time_pad_encr(message_input, one_pad_key) 
+        return one_pad_string
     else:
         print("Please write a valid input, 1, 2 or 3.")
         cipher_type = input()
         get_choice_encrypt()
+
+def get_choice_decrypt(cipher_type, message_decrypt, key_decrypt):
+    if cipher_type == "1":
+        return "one works" + cipher_type
+    elif cipher_type == "2":
+        return "two works" + cipher_type
+    elif cipher_type == "3":
+        one_pad_string = one_time_pad_encr(message_decrypt, key_decrypt) 
+        return one_pad_string
+    else:
+        print("Please write a valid input, 1, 2 or 3.")
+        cipher_type = input()
+        get_choice_encrypt()
+
+"""
+Converts a string to a list
+Input: a string
+Output: the list of capitalized characters
+        If the input has an unacceptable character, it will return None
+"""
+def convertToList(string):
+    message = []
+    for k in range(len(string)):
+        if string[k] == " ":                                             # If the message is a space
+            message.append(" ")
+        elif ord(string[k]) > 96 and ord(string[k]) < 123:         # If the message is lower case 
+            message.append(string[k].upper())
+        elif ord(string[k]) > 64 and ord(string[k]) < 91:         # If the message is in upper case
+            message.append(string[k])
+        else:
+            return None
+    return message
+
 """ 
 This is the One Time Pad Encryption Function. 
 One Time Pad uses a key that is the same exact length as the message.
@@ -135,30 +171,13 @@ def one_time_pad_decr(encr_mess, key_in):
 
 
 
-"""print("Welcome to our encryption and decryption program! Enter E to encryt and D to decrypt.")
+#TODO needs to be put back in to run program framework
+"""
+print("Welcome to our encryption and decryption program! Enter E to encryt and D to decrypt.")
 mode_type = input()
-get_mode_choice(mode_type)"""
-
+secret_message = get_mode_choice(mode_type)
+print(secret_message)
 """
-Converts a string to a list
-Input: a string
-Output: the list of capitalized characters
-        If the input has an unacceptable character, it will return None
-"""
-def convertToList(string):
-    message = []
-    for k in range(len(string)):
-        if string[k] == " ":                                             # If the message is a space
-            message.append(" ")
-        elif ord(string[k]) > 96 and ord(string[k]) < 123:         # If the message is lower case 
-            message.append(string[k].upper())
-        elif ord(string[k]) > 64 and ord(string[k]) < 91:         # If the message is in upper case
-            message.append(string[k])
-        else:
-            return None
-    return message
-
-
 
 """
 # My personal testing. Feel free to delete or change. 
