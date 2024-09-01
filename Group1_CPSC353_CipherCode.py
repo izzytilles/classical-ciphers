@@ -1,3 +1,37 @@
+
+def get_mode_choice(mode_type):
+    if mode_type == "E":
+        print("Please enter 1 for the caesar cipher, 2 for vigenere, and 3 for one time pad.")
+        cipher_type = input()
+        get_choice_encrypt(cipher_type)
+    elif mode_type == "D":
+        print("Enter the message you would like to decrypt.")
+        message_decrypt = input()
+        print("Enter the key")
+        decrpyt_key = input()
+        get_choice_encrypt(cipher_type)
+    else:
+        print("Please write a valid input E or D.")
+        mode_type= input()
+        get_mode_choice(mode_type)
+
+# choice decrypt needs to get fininished, but rest of framework is 
+def get_choice_encrypt(cipher_type):
+    print("in function encrypt")
+    if cipher_type == "1":
+        return "one works"
+    elif cipher_type == "2":
+        return "two works"
+    elif cipher_type == "3":
+        print("Enter the message you would like to encyprt.")
+        message_input = input()
+        print("Enter the key you want to use")
+        one_pad_key = input()
+        one_time_pad_encr(message_input, one_pad_key)
+    else:
+        print("Please write a valid input, 1, 2 or 3.")
+        cipher_type = input()
+        get_choice_encrypt()
 """ 
 This is the One Time Pad Encryption Function. 
 One Time Pad uses a key that is the same exact length as the message.
@@ -123,8 +157,14 @@ def one_time_pad_decr(encr_mess, key):
 
 
 
+print("Welcome to our encryption and decryption program! Enter E to encryt and D to decrypt.")
+mode_type = input()
+get_mode_choice(mode_type)
 
 
+
+
+"""
 # My personal testing. Feel free to delete or change. 
 message = input("Write message: ")
 key = input("Write key of the same length as the message: ")
@@ -132,4 +172,5 @@ print(one_time_pad_encr(message, key))
 
 decryption = input("Encrypted Message: ")
 key = input("Key: ")
-print("The message is: " + one_time_pad_decr(decryption, key))
+print("The message is: " + one_time_pad_decr(decryption, key))\
+"""
