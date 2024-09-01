@@ -1,4 +1,14 @@
 
+""" 
+This is the Get mode choice Function. 
+This function directs users to the workflow for encrypt or decrypt and takes information in about what cipher is going to
+be used.
+
+Input: the mode they would like to use (encrypt or decrypt)
+Output: the encrypted or decrypted message
+        If there is an issue then the user will be reprompted for correct information and the function will run again
+
+"""
 def get_mode_choice(mode_type):
     if mode_type == "E":
         print("Please enter 1 for the caesar cipher, 2 for vigenere, and 3 for one time pad.")
@@ -19,6 +29,8 @@ def get_mode_choice(mode_type):
         mode_type= input()
         get_mode_choice(mode_type)
 
+#TODO ciphertexts need to be saved to a FILE as well
+#TODO comments here need to be done 
 def get_choice_encrypt(cipher_type):
     if cipher_type == "1":
         print("Enter the message you would like to encrypt.")
@@ -28,7 +40,12 @@ def get_choice_encrypt(cipher_type):
         caesar_string = caesar_enc(message_input, letter)
         return caesar_string
     elif cipher_type == "2":
-        return "two works" + cipher_type
+        print("Enter the message you would like to encrypt.")
+        message_input = input()
+        print("Enter the key you want to use")
+        vigenere_key = input()
+        message_input = vigenere_encr(message_input, vigenere_key)
+        return 
     elif cipher_type == "3":
         print("Enter the message you would like to encrypt.")
         message_input = input()
@@ -41,6 +58,7 @@ def get_choice_encrypt(cipher_type):
         cipher_type = input()
         get_choice_encrypt()
 
+#TODO comments here need to be done 
 def get_choice_decrypt(cipher_type, message_decrypt, key_decrypt):
     if cipher_type == "1":
         return "one works" + cipher_type
@@ -73,6 +91,27 @@ def convertToList(string):
             return None
     return message
 
+def space_handler(char):
+    if (char == ' '):
+        return 26    
+    else:
+        return ord(char) - ord('A')
+
+
+def vigenere_encr(message, key):
+    cipher_text = []
+    length = len(message)
+    message = convertToList(message)
+    key = convertToList(key)
+
+    for i in range(length):
+        char = message[i]
+        message_value = space_handler(char)
+        key_value = space_handler(key[i]) # need to address the issue of key repeating 
+        encrypyt_char = ((message_value + key_value) % 27) + 65
+        cipher_text.append(chr(encrypyt_char))
+
+    return cipher_text
 """ 
 This is the One Time Pad Encryption Function. 
 One Time Pad uses a key that is the same exact length as the message.
@@ -177,12 +216,12 @@ def one_time_pad_decr(encr_mess, key_in):
 
 
 #TODO needs to be put back in to run program framework
-"""
+
 print("Welcome to our encryption and decryption program! Enter E to encryt and D to decrypt.")
 mode_type = input()
 secret_message = get_mode_choice(mode_type)
 print(secret_message)
-"""
+
 
 """
 # My personal testing. Feel free to delete or change. 
