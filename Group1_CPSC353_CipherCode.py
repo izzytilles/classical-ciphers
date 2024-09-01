@@ -135,9 +135,9 @@ def one_time_pad_decr(encr_mess, key_in):
 
 
 
-print("Welcome to our encryption and decryption program! Enter E to encryt and D to decrypt.")
+"""print("Welcome to our encryption and decryption program! Enter E to encryt and D to decrypt.")
 mode_type = input()
-get_mode_choice(mode_type)
+get_mode_choice(mode_type)"""
 
 """
 Converts a string to a list
