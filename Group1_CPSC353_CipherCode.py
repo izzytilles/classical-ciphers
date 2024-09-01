@@ -21,7 +21,12 @@ def get_mode_choice(mode_type):
 
 def get_choice_encrypt(cipher_type):
     if cipher_type == "1":
-        return "one works" + cipher_type
+        print("Enter the message you would like to encrypt.")
+        message_input == input()
+        print("Enter letter you would like to use for key.")
+        letter = input()
+        caesar_string = caesar_enc(message_input, letter)
+        return caesar_string
     elif cipher_type == "2":
         return "two works" + cipher_type
     elif cipher_type == "3":
@@ -189,3 +194,31 @@ decryption = input("Encrypted Message: ")
 key = input("Key: ")
 print("The message is: " + one_time_pad_decr(decryption, key))\
 """
+
+def caesar_enc(message_input, key_input):
+#Changing inputs to ascii values
+    message = []
+    key = ord(key_input) - ord('A')
+    #Encrypting the message
+    for i in message_input:
+        val = ord(i)
+        #Changing the space value
+        if val == 32:
+            val = 91
+            #Ecrypting the space value
+            val = ((((val - ord('A')) + key) % 26) + ord('A')) - 1
+            if val == 64:
+                val = 91
+        else:
+            #Ecrypting letters
+            val = ((((val - ord('A')) + key) % 26) + ord('A'))
+        #Converting 91 to be space
+        if val == 91:
+            letter = ' '
+        else:
+            letter = chr(val)
+        message.append(letter)
+    #Making string
+    encr = ''.join(message)
+    print(encr)
+    return encr
