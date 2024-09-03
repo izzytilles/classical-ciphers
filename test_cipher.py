@@ -26,6 +26,22 @@ def test_one_time_pad_decr_no_message():
 
     assert result == None
 
+def test_one_time_pad_encr():
+    encr_message = "HELLO"
+    key = "MEDIA"
+
+    result = one_time_pad_encr(encr_message, key)
+
+    assert result == ["TIOTO", "MEDIA"] # returns a tuple
+
+def test_one_time_pad_decr():
+    decr_message = "TIOTO"
+    key = "MEDIA"
+
+    result = one_time_pad_decr(decr_message, key)
+
+    assert result == "HELLO"
+
 # def get_mode_choice(mode_type):
 
 

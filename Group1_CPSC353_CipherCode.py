@@ -210,17 +210,17 @@ def one_time_pad_decr(encr_mess, key_in):
                 decr.append(chr(32))
             else:
                 decr.append(chr(letterDecr))
-        
-    return "".join(decr)        # This is the pretty string version of the decr list
+    
+    return "".join(decr)    # This is the pretty string version of the decr list 
 
 
 
 #TODO needs to be put back in to run program framework
 
-print("Welcome to our encryption and decryption program! Enter E to encryt and D to decrypt.")
-mode_type = input()
-secret_message = get_mode_choice(mode_type)
-print(secret_message)
+# print("Welcome to our encryption and decryption program! Enter E to encryt and D to decrypt.")
+# mode_type = input()
+# secret_message = get_mode_choice(mode_type)
+# print(secret_message)
 
 
 """
