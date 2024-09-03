@@ -30,7 +30,15 @@ def get_mode_choice(mode_type):
         get_mode_choice(mode_type)
 
 #TODO ciphertexts need to be saved to a FILE as well
-#TODO comments here need to be done 
+""" 
+This is the Get mode choice encrypt function. 
+This function directs users to the workflow for the cipher that they want to use and takes in the necessary
+input.
+
+Input: the cipher they would like to use 
+Output: the encrypted message is returned to get mode choice
+    
+"""
 def get_choice_encrypt(cipher_type):
     if cipher_type == "1":
         return "one works" + cipher_type
@@ -39,8 +47,8 @@ def get_choice_encrypt(cipher_type):
         message_input = input()
         print("Enter the key you want to use")
         vigenere_key = input()
-        message_input = vigenere_encr(message_input, vigenere_key)
-        return 
+        vigenere_message= vigenere_encr(message_input, vigenere_key)
+        return vigenere_message
     elif cipher_type == "3":
         print("Enter the message you would like to encrypt.")
         message_input = input()
@@ -53,7 +61,15 @@ def get_choice_encrypt(cipher_type):
         cipher_type = input()
         get_choice_encrypt()
 
-#TODO comments here need to be done 
+""" 
+This is the Get choice decrypt function. 
+This function directs users to the workflow for the cipher that they want to use and takes in the necessary
+input.
+
+Input: the cipher, message to decrypt and the key that will be used 
+Output: the encrypted message is returned to get mode choice
+    
+"""
 def get_choice_decrypt(cipher_type, message_decrypt, key_decrypt):
     if cipher_type == "1":
         return "one works" + cipher_type
@@ -86,25 +102,46 @@ def convertToList(string):
             return None
     return message
 
+""" 
+This is the space handler function. 
+This function handles the alphabet that is provided and takes care of spaces.
+
+Input: a char
+Output: the asci value of the char input
+    
+"""
 def space_handler(char):
     if (char == ' '):
         return 26    
     else:
         return ord(char) - ord('A')
 
+""" 
+This is the vignere encrypt function. 
+This function takes in a message and a key and encrypts the message.
 
+Input: message and key
+Output: the encrypted message 
+    
+"""
 def vigenere_encr(message, key):
     cipher_text = []
     length = len(message)
+    key_length = len(key)
     message = convertToList(message)
     key = convertToList(key)
+    n = 0
 
     for i in range(length):
+        if n >= key_length:
+            n = 0
         char = message[i]
         message_value = space_handler(char)
-        key_value = space_handler(key[i]) # need to address the issue of key repeating 
+        key_value = space_handler(key[n]) 
         encrypyt_char = ((message_value + key_value) % 27) + 65
         cipher_text.append(chr(encrypyt_char))
+        n+=1
+        
 
     return cipher_text
 """ 
