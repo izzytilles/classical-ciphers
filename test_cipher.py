@@ -1,6 +1,6 @@
 import pytest
 
-from Group1_CPSC353_CipherCode import one_time_pad_decr, one_time_pad_encr, convertToList, get_choice_encrypt, get_mode_choice
+from Group1_CPSC353_CipherCode import one_time_pad_decr, one_time_pad_encr, convertToList, get_choice_encrypt, get_mode_choice, vigenere_encr, caesar_enc
 
 def test_one_time_pad_decr_wrong_key():
     encr_message = "HI"
@@ -42,8 +42,22 @@ def test_one_time_pad_decr():
 
     assert result == "HELLO"
 
-# def get_mode_choice(mode_type):
+def test_caesar_enc():
+    encr_message = "THIS IS SECRET"
+    key = "X"
 
+    result = caesar_enc(encr_message, key)
 
-# def test_mode_choice():
-#     mode_choice = "E"
+    assert result == "QEFPWFPWPBZOBQ"
+
+# def test_space_handler():
+
+def test_vignere_encr():
+    encr_message = "HELLO"
+    key = "CAT"
+
+    result = vigenere_encr(encr_message, key)
+
+    assert result == "HSDEK" # dummy 5-letter value until we actually encrypt HELLO using CAT
+
+#def
