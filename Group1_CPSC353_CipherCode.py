@@ -1,14 +1,4 @@
 
-""" 
-This is the Get mode choice Function. 
-This function directs users to the workflow for encrypt or decrypt and takes information in about what cipher is going to
-be used.
-
-Input: the mode they would like to use (encrypt or decrypt)
-Output: the encrypted or decrypted message
-        If there is an issue then the user will be reprompted for correct information and the function will run again
-
-"""
 def caesar_enc(message_input, key_input):
 #Changing inputs to ascii values
     message = []
@@ -59,7 +49,16 @@ def caesar_dec(message_input, key_input):
     print(decr)
     return decr
 
+""" 
+This is the Get mode choice Function. 
+This function directs users to the workflow for encrypt or decrypt and takes information in about what cipher is going to
+be used.
 
+Input: the mode they would like to use (encrypt or decrypt)
+Output: the encrypted or decrypted message
+        If there is an issue then the user will be reprompted for correct information and the function will run again
+
+"""
 def get_mode_choice(mode_type):
     if mode_type == "E":
         print("Please enter 1 for the caesar cipher, 2 for vigenere, and 3 for one time pad.")
