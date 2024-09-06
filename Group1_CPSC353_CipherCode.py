@@ -9,15 +9,9 @@ def caesar_enc(message_input, key_input):
         #Changing the space value
         if val == 32:
             val = 91
-            #Ecrypting the space value
-            val = ((((val - ord('A')) + key) % 26) + ord('A')) - 1
-            if val == 64:
-                val = 91
-        else:
-            #Ecrypting letters
-            val = ((((val - ord('A')) + key) % 26) + ord('A'))
-        #Converting 91 to be space
-        if val == 91:
+
+        val = ((((val - ord('A')) + key) % 27) + ord('A'))
+        if val == ord('['):
             letter = ' '
         else:
             letter = chr(val)
@@ -26,6 +20,7 @@ def caesar_enc(message_input, key_input):
     encr = ''.join(message)
     #print(encr)
     return encr
+
 #Deciphering caesar runs but isnt quite correct yet
 def caesar_dec(message_input, key_input):
     message = []
@@ -34,19 +29,13 @@ def caesar_dec(message_input, key_input):
         val = ord(i)
         if val == 32:
             val = 91
-            val = ((((val - ord('A')) - key) + 26) + ord('A')) - 1
-            if val == 64:
-                val == 91
-        else:
-                val = ((((val - ord('A')) - key) + 26) + ord('A'))
-
-        if val == 91:
+        val = ((val - ord('A') - key + 27) % 27) + ord('A')
+        if val == ord('['):
             letter = ' '
         else:
             letter = chr(val)
         message.append(letter)
     decr = ''.join(message)
-    print(decr)
     return decr
 
 """ 
