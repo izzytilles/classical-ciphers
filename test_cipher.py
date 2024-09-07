@@ -1,6 +1,9 @@
 import pytest
 
-from Group1_CPSC353_CipherCode import one_time_pad_decr, one_time_pad_encr, convert_to_list, get_choice_encrypt, get_mode_choice, vigenere_encr, caesar_enc
+from main import convert_to_list, get_choice_encrypt, get_mode_choice
+from one_time_pad import one_time_pad_decr, one_time_pad_encr
+from caesar import caesar_enc, caesar_dec
+from vigenere import vigenere_encr, vigenere_decrypt
 
 def test_one_time_pad_decr_wrong_key():
     encr_message = "HI"
@@ -72,7 +75,23 @@ def test_caesar_encr_lower():
 
     result = caesar_enc(encr_message, key)
 
-    assert result == "x"
+    assert result == "X"
+
+def test_caesar_decr():
+    encr_message = "X"
+    key = "A"
+
+    result = caesar_enc(encr_message, key)
+
+    assert result == "X"
+
+def test_caesar_encr_lower():
+    encr_message = "x"
+    key = "a"
+
+    result = caesar_enc(encr_message, key)
+
+    assert result == "X"
 
 # def test_space_handler():
 
@@ -92,4 +111,19 @@ def test_vignere_encr_lower():
 
     assert result == "JEDNO" 
 
+def test_vigenere_decr():
+    decr_message = "JEDNO"
+    key = "CAT"
+
+    result = vigenere_decrypt(decr_message, key)
+
+    assert result == "HELLO"
+
+def test_vigenere_decr_lower():
+    decr_message = "jedno"
+    key = "cat"
+
+    result = vigenere_decrypt(decr_message, key)
+
+    assert result == "HELLO"
 #def
