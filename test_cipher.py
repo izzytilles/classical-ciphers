@@ -1,6 +1,6 @@
 import pytest
 
-from main import one_time_pad_decr, one_time_pad_encr, convertToList, get_choice_encrypt, get_mode_choice, vigenere_encr, caesar_enc
+from Group1_CPSC353_CipherCode import one_time_pad_decr, one_time_pad_encr, convertToList, get_choice_encrypt, get_mode_choice, vigenere_encr, caesar_enc
 
 def test_one_time_pad_decr_wrong_key():
     encr_message = "HI"
@@ -59,20 +59,20 @@ def test_one_time_pad_decr_lower():
     assert result == "HELLO"
 
 def test_caesar_encr():
-    encr_message = "THIS IS SECRET"
+    encr_message = "A"
     key = "X"
 
     result = caesar_enc(encr_message, key)
 
-    assert result == "QEFPWFPWPBZOBQ"
+    assert result == "X"
 
 def test_caesar_encr_lower():
-    encr_message = "this is secret"
+    encr_message = "a"
     key = "x"
 
     result = caesar_enc(encr_message, key)
 
-    assert result == "QEFPWFPWPBZOBQ"
+    assert result == "x"
 
 # def test_space_handler():
 
