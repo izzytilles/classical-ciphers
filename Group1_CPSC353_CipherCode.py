@@ -156,7 +156,7 @@ Input: a string
 Output: the list of capitalized characters
         If the input has an unacceptable character, it will return None
 """
-def convertToList(string):
+def convert_to_list(string):
     message = []
     for k in range(len(string)):
         if string[k] == " ":                                             # If the message is a space
@@ -195,8 +195,8 @@ def vigenere_encr(message, key):
     cipher_text = []
     length = len(message)
     key_length = len(key)
-    message = convertToList(message)
-    key = convertToList(key)
+    message = convert_to_list(message)
+    key = convert_to_list(key)
     n = 0
 
     for i in range(length):
@@ -234,8 +234,8 @@ Output: the decrypted message in a list form
 """
 def vigenere_decrypt(message, key):
     plain_text = []
-    message = convertToList(message)
-    key = convertToList(key)
+    message = convert_to_list(message)
+    key = convert_to_list(key)
     length = len(message)
     key_length = len(key)
     n = 0
@@ -268,10 +268,10 @@ def one_time_pad_encr(message_input, key_input):
         return None
     
     # We want to make sure the message and key are in capital letters and do not contain special characters
-    message = convertToList(message_input)            # This is the version of the message in capital letters
+    message = convert_to_list(message_input)            # This is the version of the message in capital letters
     if message == None:
         return None
-    key = convertToList(key_input)                # This is the version of the key in capital letters
+    key = convert_to_list(key_input)                # This is the version of the key in capital letters
     if key == None:
         return None
 
@@ -314,12 +314,12 @@ Output: the decrypted message
 """
 def one_time_pad_decr(encr_mess, key_in):
     # Change the input encryption message into a list of characters
-    encr = convertToList(encr_mess)
+    encr = convert_to_list(encr_mess)
     if encr == None:
         return None
     
     # Change the input key into a list of characters. Will capitalize the lower case letters.
-    key = convertToList(key_in)
+    key = convert_to_list(key_in)
     if key == None:
         return None
     

@@ -1,6 +1,6 @@
 import pytest
 
-from Group1_CPSC353_CipherCode import one_time_pad_decr, one_time_pad_encr, convertToList, get_choice_encrypt, get_mode_choice, vigenere_encr, caesar_enc
+from Group1_CPSC353_CipherCode import one_time_pad_decr, one_time_pad_encr, convert_to_list, get_choice_encrypt, get_mode_choice, vigenere_encr, caesar_enc
 
 def test_one_time_pad_decr_wrong_key():
     encr_message = "HI"
