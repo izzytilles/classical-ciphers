@@ -1,7 +1,16 @@
+"""
+This is the Caesar Encryption function.
+This function is for encrypting the users message using the Caesar cipher.
 
+Input: The user message they would like to encrypt and the character they would like to use as the key.
+Output: The encrypted message.
+"""
 def caesar_enc(message_input, key_input):
 #Changing inputs to ascii values
     message = []
+    #Handling lower case
+    message_input = message_input.upper()
+    key_input = key_input.upper()
     key = ord(key_input) - ord('A')
     #Encrypting the message
     for i in message_input:
@@ -9,15 +18,9 @@ def caesar_enc(message_input, key_input):
         #Changing the space value
         if val == 32:
             val = 91
-            #Ecrypting the space value
-            val = ((((val - ord('A')) + key) % 26) + ord('A')) - 1
-            if val == 64:
-                val = 91
-        else:
-            #Ecrypting letters
-            val = ((((val - ord('A')) + key) % 26) + ord('A'))
-        #Converting 91 to be space
-        if val == 91:
+
+        val = ((((val - ord('A')) + key) % 27) + ord('A'))
+        if val == ord('['):
             letter = ' '
         else:
             letter = chr(val)
@@ -27,27 +30,32 @@ def caesar_enc(message_input, key_input):
     #print(encr)
     return encr
 
+"""
+This is the Caesar Decryption function.
+This function is for decrypting the users message using the Caesar cipher.
 
+Input: The user message they would like to decrypt and the character they used as the key.
+Output: The decrypted message.
+"""
 def caesar_dec(message_input, key_input):
     message = []
+    #Handling lower case
+    message_input = message_input.upper()
+    key_input = key_input.upper()
     key = ord(key_input) - ord('A')
+    #decrypting
     for i in message_input:
         val = ord(i)
         if val == 32:
             val = 91
-            val = ((((val - ord('A')) - key) + 26) + ord('A')) - 1
-            if val == 64:
-                val == 91
-        else:
-                val = ((((val - ord('A')) - key) + 26) + ord('A'))
-
-        if val == 91:
+        val = ((val - ord('A') - key + 27) % 27) + ord('A')
+        if val == ord('['):
             letter = ' '
         else:
             letter = chr(val)
         message.append(letter)
+    #Creating return string
     decr = ''.join(message)
-    print(decr)
     return decr
 
 """ 
@@ -148,7 +156,7 @@ Input: a string
 Output: the list of capitalized characters
         If the input has an unacceptable character, it will return None
 """
-def convertToList(string):
+def convert_to_list(string):
     message = []
     for k in range(len(string)):
         if string[k] == " ":                                             # If the message is a space
@@ -187,8 +195,8 @@ def vigenere_encr(message, key):
     cipher_text = []
     length = len(message)
     key_length = len(key)
-    message = convertToList(message)
-    key = convertToList(key)
+    message = convert_to_list(message)
+    key = convert_to_list(key)
     n = 0
 
     for i in range(length):
@@ -203,7 +211,7 @@ def vigenere_encr(message, key):
 
         cipher_text.append(chr(encrypyt_char))
         n+=1
-    cipher_text = string(cipher_text)
+    # cipher_text = string(cipher_text)
     return cipher_text
 
 """ 
@@ -230,12 +238,8 @@ Output: the decrypted message in a list form
 """
 def vigenere_decrypt(message, key):
     plain_text = []
-    message = convertToList(message)
-    if message == None:
-        return None
-    key = convertToList(key)
-    if key == None:
-        return None
+    message = convert_to_list(message)
+    key = convert_to_list(key)
     length = len(message)
     key_length = len(key)
     n = 0
@@ -268,10 +272,10 @@ def one_time_pad_encr(message_input, key_input):
         return None
     
     # We want to make sure the message and key are in capital letters and do not contain special characters
-    message = convertToList(message_input)            # This is the version of the message in capital letters
+    message = convert_to_list(message_input)            # This is the version of the message in capital letters
     if message == None:
         return None
-    key = convertToList(key_input)                # This is the version of the key in capital letters
+    key = convert_to_list(key_input)                # This is the version of the key in capital letters
     if key == None:
         return None
 
@@ -314,12 +318,12 @@ Output: the decrypted message
 """
 def one_time_pad_decr(encr_mess, key_in):
     # Change the input encryption message into a list of characters
-    encr = convertToList(encr_mess)
+    encr = convert_to_list(encr_mess)
     if encr == None:
         return None
     
     # Change the input key into a list of characters. Will capitalize the lower case letters.
-    key = convertToList(key_in)
+    key = convert_to_list(key_in)
     if key == None:
         return None
     
@@ -355,10 +359,12 @@ def one_time_pad_decr(encr_mess, key_in):
 
 
 #TODO needs to be put back in to run program framework
-print("Welcome to our encryption and decryption program! Enter E to encryt and D to decrypt.")
-mode_type = input()
-secret_message = get_mode_choice(mode_type)
-print(secret_message)
+
+if __name__ == "__main__":
+    print("Welcome to our encryption and decryption program! Enter E to encryt and D to decrypt.")
+    mode_type = input()
+    secret_message = get_mode_choice(mode_type)
+    print(secret_message)
 
 
 """
@@ -370,4 +376,3 @@ decryption = input("Encrypted Message: ")
 key = input("Key: ")
 print("The message is: " + one_time_pad_decr(decryption, key))\
 """
-
