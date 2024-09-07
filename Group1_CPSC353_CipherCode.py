@@ -26,7 +26,8 @@ def caesar_enc(message_input, key_input):
     encr = ''.join(message)
     #print(encr)
     return encr
-#Deciphering caesar runs but isnt quite correct yet
+
+
 def caesar_dec(message_input, key_input):
     message = []
     key = ord(key_input) - ord('A')
@@ -79,7 +80,7 @@ def get_mode_choice(mode_type):
         mode_type= input()
         get_mode_choice(mode_type)
 
-#TODO ciphertexts need to be saved to a FILE as well
+
 """ 
 This is the Get mode choice encrypt function. 
 This function directs users to the workflow for the cipher that they want to use and takes in the necessary
@@ -196,9 +197,13 @@ def vigenere_encr(message, key):
         char = message[i]
         message_value = space_handler(char)
         key_value = space_handler(key[n]) 
-        encrypyt_char = ((message_value + key_value) % 27) + 65
+        encrypyt_char = ((message_value + key_value) % 27) + 65 
+        # if (encrypt_char == " "):
+            #TODO change this to return a string and not a list!!!!!
+
         cipher_text.append(chr(encrypyt_char))
         n+=1
+    cipher_text = string(cipher_text)
     return cipher_text
 
 """ 
@@ -226,7 +231,11 @@ Output: the decrypted message in a list form
 def vigenere_decrypt(message, key):
     plain_text = []
     message = convertToList(message)
+    if message == None:
+        return None
     key = convertToList(key)
+    if key == None:
+        return None
     length = len(message)
     key_length = len(key)
     n = 0
@@ -346,7 +355,6 @@ def one_time_pad_decr(encr_mess, key_in):
 
 
 #TODO needs to be put back in to run program framework
-
 print("Welcome to our encryption and decryption program! Enter E to encryt and D to decrypt.")
 mode_type = input()
 secret_message = get_mode_choice(mode_type)
@@ -358,7 +366,6 @@ print(secret_message)
 message = input("Write message: ")
 key = input("Write key of the same length as the message: ")
 print(one_time_pad_encr(message, key))
-
 decryption = input("Encrypted Message: ")
 key = input("Key: ")
 print("The message is: " + one_time_pad_decr(decryption, key))\
