@@ -5,6 +5,8 @@ from one_time_pad import one_time_pad_decr, one_time_pad_encr
 from caesar import caesar_enc, caesar_dec
 from vigenere import vigenere_encr, vigenere_decrypt
 
+# test one time pad
+
 def test_one_time_pad_encr_long_key():
     encr_message = "HI"
     key = "DOG"
@@ -85,6 +87,8 @@ def test_one_time_pad_decr_lower():
 
     assert result == None
 
+# test caesar
+
 def test_caesar_encr():
     encr_message = "A"
     key = "X"
@@ -135,7 +139,10 @@ def test_caesar_decr_long_key():
 
 # def test_space_handler():
 
-def test_vignere_encr():
+
+# test vigenere
+
+def test_vigenere_encr():
     encr_message = "HELLO"
     key = "CAT"
 
@@ -143,7 +150,7 @@ def test_vignere_encr():
 
     assert result == "JEDNO" 
 
-def test_vignere_encr_lower():
+def test_vigenere_encr_lower():
     encr_message = "hello"
     key = "cat"
 
@@ -182,5 +189,3 @@ def test_vigenere_decr_long_key():
     result = vigenere_decrypt(decr_message, key)
 
     assert result == None
-
-#def

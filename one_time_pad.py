@@ -9,7 +9,6 @@ Output: the encrypted message and the key (with some words labeling each)
 
 """
 def one_time_pad_encr(message, key):
-    # We assume we were passed a list
 
     # First we make sure that the lengths of the message and key match
     length = len(message)     
@@ -27,7 +26,7 @@ def one_time_pad_encr(message, key):
 
         # If the "letter" of the message is a space
         if message[i] == " ":
-            letter_encr = (26 + ord(key[i]) - 65) % 27 + 65      # 26 is our decided value for a space, ord() changes the value to be the ASCII number value, we subtract 65 to get the key down to our 0-26 range, we mod by 27 to make sure that the total remains below 27, we add 65 to get it back to the correct ASCII value
+            letter_encr = (26 + ord(key[i]) - ord("A")) % 27 + ord("A")      # 26 is our decided value for a space, ord() changes the value to be the ASCII number value, we subtract 65 to get the key down to our 0-26 range, we mod by 27 to make sure that the total remains below 27, we add 65 to get it back to the correct ASCII value
             if letter_encr == 91:         # If the letter is supposed to be a space it will be 91 right now, we must correct that
                 encr.append(chr(32))    # the character chr() for 32 is a space
             else:                       
@@ -35,7 +34,7 @@ def one_time_pad_encr(message, key):
         
         # If the "letter" of the message is actually a letter
         else:
-            letter_encr = (( ord(message[i]) - 65 + ord(key[i]) - 65) ) % 27 + 65      # This will subtract the base value A from each letter, add the value of the key in its 0-16 form, and mod 27 to make sure values are between 0 and 26, add 65 to get it back to the ASCII table leter
+            letter_encr = (( ord(message[i]) - ord("A") + ord(key[i]) - ord("A")) ) % 27 + ord("A")      # This will subtract the base value A from each letter, add the value of the key in its 0-16 form, and mod 27 to make sure values are between 0 and 26, add 65 to get it back to the ASCII table leter
             if letter_encr == 91:             # If the letter is supposed to be a space it will be 91 right now, we must correct that
                 encr.append(chr(32))
             else:
