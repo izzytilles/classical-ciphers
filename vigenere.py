@@ -84,7 +84,8 @@ def vigenere_decrypt(message, key):
     length = len(message)
     key_length = len(key)
     n = 0
-
+    if key_length > length:
+        return None
     for i in range(length):
         if n >= key_length:
             n = 0

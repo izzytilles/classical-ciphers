@@ -166,4 +166,21 @@ def test_vigenere_decr_lower():
     result = vigenere_decrypt(decr_message, key)
 
     assert result == "HELLO"
+
+def test_vigenere_encr_long_key():
+    encr_message = "cat"
+    key = "hello"
+
+    result = vigenere_encr(encr_message, key)
+
+    assert result == None 
+
+def test_vigenere_decr_long_key():
+    decr_message = "cat"
+    key = "hello"
+
+    result = vigenere_decrypt(decr_message, key)
+
+    assert result == None
+
 #def
