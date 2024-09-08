@@ -46,8 +46,8 @@ def vigenere_encr(message, key):
     cipher_text = []
     length = len(message)
     key_length = len(key)
-    message = convert_to_list(message)
-    key = convert_to_list(key)
+    #message = convert_to_list(message)
+    #key = convert_to_list(key)
     n = 0
 
     for i in range(length):
@@ -89,8 +89,8 @@ Output: the decrypted message in a list form
 """
 def vigenere_decrypt(message, key):
     plain_text = []
-    message = convert_to_list(message)
-    key = convert_to_list(key)
+    #message = convert_to_list(message)
+    #key = convert_to_list(key)
     length = len(message)
     key_length = len(key)
     n = 0

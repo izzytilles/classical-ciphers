@@ -28,25 +28,25 @@ Output: the encrypted message and the key (with some words labeling each)
         If there is an issue, it will output None
 
 """
-def one_time_pad_encr(message_input, key_input):
+def one_time_pad_encr(message, key):
     
     # Frist we make sure that the lengths of the message and key match
-    length = len(message_input)     # We will use this later so it gets its own variable
-    if length != len(key_input):
-        return None
+    #length = len(message_input)     # We will use this later so it gets its own variable
+    #if length != len(key_input):
+    #    return None
     
     # We want to make sure the message and key are in capital letters and do not contain special characters
-    message = convert_to_list(message_input)            # This is the version of the message in capital letters
-    if message == None:
-        return None
-    key = convert_to_list(key_input)                # This is the version of the key in capital letters
-    if key == None:
-        return None
+    #message = convert_to_list(message_input)            # This is the version of the message in capital letters
+    #if message == None:
+    #    return None
+    #key = convert_to_list(key_input)                # This is the version of the key in capital letters
+    #if key == None:
+    #    return None
 
     encr = []                               # This is the encrypted message that we will output
 
     # This for loop adds the key letter to the associated letter in the message to encrypt it, and then appends the encrypted letter to the encrypted message 
-    for i in range(length):                 
+    for i in range(len(message)):                 
         
         # If the "letter" of the message is a space
         if message[i] == " ":
@@ -80,27 +80,27 @@ Output: the decrypted message
         If there is an issue it will return None
 
 """
-def one_time_pad_decr(encr_mess, key_in):
+def one_time_pad_decr(encr, key):
     # Change the input encryption message into a list of characters
-    encr = convert_to_list(encr_mess)
-    if encr == None:
-        return None
+    #encr = convert_to_list(encr_mess)
+    #if encr == None:
+    #    return None
     
     # Change the input key into a list of characters. Will capitalize the lower case letters.
-    key = convert_to_list(key_in)
-    if key == None:
-        return None
+    #key = convert_to_list(key_in)
+    #if key == None:
+    #    return None
     
     # initialize our descryption list
     decr = []
     
     # make sure that the length of the message and the key match
-    length = len(encr_mess)
-    if length != len(key_in):
+    length = len(encr)
+    if length != len(key):
         return None
 
     # This for loop decrypts the message
-    for i in range(length):                 
+    for i in range(len(encr)):                 
         
         # If the "letter" of the encrypted message is a space
         if encr[i] == " ":

@@ -9,7 +9,6 @@ def caesar_enc(message_input, key_input):
 #Changing inputs to ascii values
     message = []
     #Handling lower case
-    message_input = message_input.upper()
     key_input = key_input.upper()
     key = ord(key_input) - ord('A')
     #Encrypting the message
@@ -40,7 +39,6 @@ Output: The decrypted message.
 def caesar_dec(message_input, key_input):
     message = []
     #Handling lower case
-    message_input = message_input.upper()
     key_input = key_input.upper()
     key = ord(key_input) - ord('A')
     #decrypting
