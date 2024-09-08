@@ -50,19 +50,19 @@ def one_time_pad_encr(message_input, key_input):
         
         # If the "letter" of the message is a space
         if message[i] == " ":
-            letterEncr = (26 + ord(key[i]) - 65) % 27 + 65      # 26 is our decided value for a space, ord() changes the value to be the ASCII number value, we subtract 65 to get the key down to our 0-26 range, we mod by 27 to make sure that the total remains below 27, we add 65 to get it back to the correct ASCII value
-            if letterEncr == 91:         # If the letter is supposed to be a space it will be 91 right now, we must correct that
+            letter_encr = (26 + ord(key[i]) - 65) % 27 + 65      # 26 is our decided value for a space, ord() changes the value to be the ASCII number value, we subtract 65 to get the key down to our 0-26 range, we mod by 27 to make sure that the total remains below 27, we add 65 to get it back to the correct ASCII value
+            if letter_encr == 91:         # If the letter is supposed to be a space it will be 91 right now, we must correct that
                 encr.append(chr(32))    # the character chr() for 32 is a space
             else:                       
-                encr.append(chr(letterEncr))    # letterEncr is technically a number that represents a letter, it is not a character until you use chr()
+                encr.append(chr(letter_encr))    # letterEncr is technically a number that represents a letter, it is not a character until you use chr()
         
         # If the "letter" of the message is actually a letter
         else:
-            letterEncr = (( ord(message[i]) - 65 + ord(key[i]) - 65) ) % 27 + 65      # This will subtract the base value A from each letter, add the value of the key in its 0-16 form, and mod 27 to make sure values are between 0 and 26, add 65 to get it back to the ASCII table leter
-            if letterEncr == 91:             # If the letter is supposed to be a space it will be 91 right now, we must correct that
+            letter_encr = (( ord(message[i]) - 65 + ord(key[i]) - 65) ) % 27 + 65      # This will subtract the base value A from each letter, add the value of the key in its 0-16 form, and mod 27 to make sure values are between 0 and 26, add 65 to get it back to the ASCII table leter
+            if letter_encr == 91:             # If the letter is supposed to be a space it will be 91 right now, we must correct that
                 encr.append(chr(32))
             else:
-                encr.append(chr(letterEncr))
+                encr.append(chr(letter_encr))
 
     # This prettifies the lists back into a string so it is easy to read and can be copied and pasted for decryption
     final_encrypt = "".join(encr)
@@ -104,18 +104,18 @@ def one_time_pad_decr(encr_mess, key_in):
         
         # If the "letter" of the encrypted message is a space
         if encr[i] == " ":
-            letterDecr = (26 - ord(key[i]) + 65) % 27 + 65      # The space value starts at 26, we subtract the value of the key which is the ord()-65 (double negative makes a positive so we add 65), mod 27 to bring it back to our range of 0-26, then add 65 to bring it back to ASCII
-            if letterDecr == 91:         # If the letter is supposed to be a space it will be 91 right now, we must correct that
+            letter_decr = (26 - ord(key[i]) + 65) % 27 + 65      # The space value starts at 26, we subtract the value of the key which is the ord()-65 (double negative makes a positive so we add 65), mod 27 to bring it back to our range of 0-26, then add 65 to bring it back to ASCII
+            if letter_decr == 91:         # If the letter is supposed to be a space it will be 91 right now, we must correct that
                 decr.append(chr(32))
             else:
-                decr.append(chr(letterDecr))        # note: letterDecr is actually the number value of the letter
+                decr.append(chr(letter_decr))        # note: letterDecr is actually the number value of the letter
         
         # If the "letter" of the encrypted message is actually a letter
         elif ord(encr[i]) > 64 and ord(encr[i]) < 91:
-            letterDecr = (( ord(encr[i]) - 65 - ord(key[i]) + 65) ) % 27 + 65      # This will subtract the base value A from each letter, subtract the value of the simplified letters together, and mod 27 to get values between 0 and 26, add 65 to get it back to the ASCII table leter
-            if letterDecr == 91:             # If the letter is supposed to be a space it will be 91 right now, we must correct that
+            letter_decr = (( ord(encr[i]) - 65 - ord(key[i]) + 65) ) % 27 + 65      # This will subtract the base value A from each letter, subtract the value of the simplified letters together, and mod 27 to get values between 0 and 26, add 65 to get it back to the ASCII table leter
+            if letter_decr == 91:             # If the letter is supposed to be a space it will be 91 right now, we must correct that
                 decr.append(chr(32))
             else:
-                decr.append(chr(letterDecr))
+                decr.append(chr(letter_decr))
     
     return "".join(decr)    # This is the pretty string version of the decr list 
