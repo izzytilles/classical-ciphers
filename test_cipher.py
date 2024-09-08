@@ -5,7 +5,7 @@ from one_time_pad import one_time_pad_decr, one_time_pad_encr
 from caesar import caesar_enc, caesar_dec
 from vigenere import vigenere_encr, vigenere_decrypt
 
-def test_one_time_pad_decr_wrong_key():
+def test_one_time_pad_encr_long_key():
     encr_message = "HI"
     key = "DOG"
 
@@ -13,7 +13,31 @@ def test_one_time_pad_decr_wrong_key():
 
     assert result == None
 
-def test_one_time_pad_decr_no_key():
+def test_one_time_pad_encr_short_key():
+    encr_message = "HI"
+    key = "D"
+
+    result = one_time_pad_encr(encr_message, key)
+
+    assert result == None
+
+def test_one_time_pad_decr_long_key():
+    decr_message = "HI"
+    key = "DOG"
+
+    result = one_time_pad_decr(decr_message, key)
+
+    assert result == None
+
+def test_one_time_pad_decr_short_key():
+    decr_message = "HI"
+    key = "D"
+
+    result = one_time_pad_decr(decr_message, key)
+
+    assert result == None
+
+def test_one_time_pad_encr_no_key():
     encr_message = "IZZY"
     key = ""
 
@@ -21,7 +45,7 @@ def test_one_time_pad_decr_no_key():
 
     assert result == None
 
-def test_one_time_pad_decr_no_message():
+def test_one_time_pad_encr_no_message():
     encr_message = ""
     key = "HELLO"
 
@@ -90,6 +114,22 @@ def test_caesar_encr_lower():
     key = "a"
 
     result = caesar_enc(encr_message, key)
+
+    assert result == None
+
+def test_caesar_encr_long_key():
+    encr_message = "X"
+    key = "AB"
+
+    result = caesar_enc(encr_message, key)
+
+    assert result == None
+
+def test_caesar_decr_long_key():
+    decr_message = "X"
+    key = "AB"
+
+    result = caesar_dec(decr_message, key)
 
     assert result == None
 
