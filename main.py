@@ -22,22 +22,13 @@ def get_mode_choice(mode_type):
     elif mode_type == "D":
         print("Please enter 1 for the caesar cipher, 2 for vigenere, and 3 for one time pad.")
         cipher_type = input()
-        print("Enter the message you would like to decrypt.")
-        message_decrypt = convert_to_list(input())
-        while message_decrypt == None:
-            print("Please enter a valid message (only letters and spaces)")
-            message_decrypt = convert_to_list(input())
-        print("Enter the key")
-        key_decrypt = convert_to_list(input())
-        while key_decrypt == None:
-            print("Please enter a valid key (only letters and spaces)")
-            key_decrypt = convert_to_list(input())
-        decrypt_message = get_choice_decrypt(cipher_type, message_decrypt, key_decrypt)
-        return decrypt_message
+        decrypted_message = get_choice_decrypt(cipher_type)
+        return decrypted_message
     else:
         print("Please write a valid input E or D.")
         mode_type= input()
-        get_mode_choice(mode_type)
+        choice = get_mode_choice(mode_type)
+        return choice
 
 #TODO ciphertexts need to be saved to a FILE as well
 """ 
@@ -107,30 +98,56 @@ Input: the cipher, message to decrypt and the key that will be used
 Output: the encrypted message is returned to get mode choice
     
 """
-def get_choice_decrypt(cipher_type, message_decrypt, key_decrypt):
+def get_choice_decrypt(cipher_type):
     file_name = "ciphers.csv"
     if cipher_type == "1":
-        caesar_string = caesar_dec(message_decrypt, key_decrypt[0])
-        load_table(file_name, "".join(message_decrypt), "".join(key_decrypt), caesar_string)
+        print("Enter the message you would like to decrypt.")
+        message_input = convert_to_list(input())
+        while message_input == None:
+            print("Please enter a valid message (only letters and spaces)")
+            message_input = convert_to_list(input())
+        print("Enter letter used for key.")
+        letter = input()
+        while len(letter) > 1 or (ord(letter) < 32) or (ord(letter) > 32 and ord(letter) < 65) or (ord(letter) > 90 and ord(letter) < 97) or (ord(letter) > 122):
+            print("Please enter a single valid character (letter or space)")
+            letter = input()
+        caesar_string = caesar_dec(message_input, letter)
+        load_table(file_name, "".join(message_input), letter, caesar_string)
         return caesar_string
     elif cipher_type == "2":
-        while key_decrypt == None or (len(key_decrypt) > len(message_decrypt)):
-            print("There was an issue with your key. Please enter the correct key.")
-            key_decrypt = convert_to_list(input())
-        vigenere_string = vigenere_decrypt(message_decrypt, key_decrypt)
-        load_table(file_name, "".join(message_decrypt), "".join(key_decrypt), vigenere_string)
-        return vigenere_string
+        print("Enter the message you would like to decrypt.")
+        message_input = convert_to_list(input())
+        while message_input == None:
+            print("Please enter a valid message (only letters and spaces)")
+            message_input = convert_to_list(input())
+        print("Enter the key used")
+        vigenere_key = convert_to_list(input())
+        while vigenere_key == None or (len(vigenere_key) > len(message_input)):
+            print("Please enter a valid key (only letters and spaces) that is less than or equal to the length of the message")
+            vigenere_key = convert_to_list(input())
+        vigenere_message= vigenere_decrypt(message_input, vigenere_key)
+        load_table(file_name, "".join(message_input), "".join(vigenere_key),vigenere_message)
+        return vigenere_message
     elif cipher_type == "3":
-        while key_decrypt == None or (len(message_decrypt) != len(key_decrypt)):
-            print("There was an issue with your key. Please enter the correct key.")
-            key_decrypt = convert_to_list(input())
-        one_pad_string = one_time_pad_decr(message_decrypt, key_decrypt) 
-        load_table(file_name, "".join(message_decrypt), "".join(key_decrypt), one_pad_string)
+        print("Enter the message you would like to decrypt.")
+        message_input = convert_to_list(input())
+        while message_input == None:
+            print("Please enter a valid message (only letters and spaces)")
+            message_input = convert_to_list(input())
+        print("Enter the key you want to use")
+        one_pad_key = convert_to_list(input())
+        while one_pad_key == None or len(one_pad_key) != len(message_input):
+            print("Enter a valid key (only letters and spaces) that is the same length as the message")
+            one_pad_key = convert_to_list(input())
+        one_pad_string = one_time_pad_decr(message_input, one_pad_key) 
+        load_table(file_name, "".join(message_input), "".join(one_pad_key), one_pad_string)
         return one_pad_string
     else:
         print("Please write a valid input, 1, 2 or 3.")
         cipher_type = input()
-        get_choice_encrypt()
+        choice = get_choice_decrypt(cipher_type)
+    return choice
+
 
 """
 Converts a string to a list
