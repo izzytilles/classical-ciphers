@@ -168,6 +168,12 @@ def convert_to_list(string):
             return None
     return message
 
+"""
+Prints output to the csv file ciphers.csv
+Input: file name, message, key, and the result of the encryption/decryption
+Output: output is written in the cipher.csv file
+"""
+
 def load_table(file_name, message, key, result):
     data = [[message], [key], [result]]
 
