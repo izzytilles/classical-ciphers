@@ -1,6 +1,7 @@
 from caesar import caesar_enc, caesar_dec
 from vigenere import vigenere_encr, vigenere_decrypt
 from one_time_pad import one_time_pad_encr, one_time_pad_decr
+import csv
 
 """ 
 This is the Get mode choice Function. 
@@ -43,12 +44,14 @@ Output: the encrypted message is returned to get mode choice
     
 """
 def get_choice_encrypt(cipher_type):
+    file_name = "ciphers.csv"
     if cipher_type == "1":
         print("Enter the message you would like to encrypt.")
         message_input = input()
         print("Enter letter you would like to use for key.")
         letter = input()
         caesar_string = caesar_enc(message_input, letter)
+        load_table(file_name, message_input, letter, caesar_string)
         return caesar_string
     elif cipher_type == "2":
         print("Enter the message you would like to encrypt.")
@@ -56,6 +59,7 @@ def get_choice_encrypt(cipher_type):
         print("Enter the key you want to use")
         vigenere_key = input()
         vigenere_message= vigenere_encr(message_input, vigenere_key)
+        load_table(file_name, message_input, vigenere_key,vigenere_message)
         return vigenere_message
     elif cipher_type == "3":
         print("Enter the message you would like to encrypt.")
@@ -63,6 +67,7 @@ def get_choice_encrypt(cipher_type):
         print("Enter the key you want to use")
         one_pad_key = input()
         one_pad_string = one_time_pad_encr(message_input, one_pad_key) 
+        load_table(file_name, message_input, one_pad_key, one_pad_string)
         return one_pad_string
     else:
         print("Please write a valid input, 1, 2 or 3.")
@@ -79,14 +84,18 @@ Output: the encrypted message is returned to get mode choice
     
 """
 def get_choice_decrypt(cipher_type, message_decrypt, key_decrypt):
+    file_name = "ciphers.csv"
     if cipher_type == "1":
         caesar_string = caesar_dec(message_decrypt, key_decrypt)
+        load_table(file_name, message_decrypt, key_decrypt, caesar_string)
         return caesar_string
     elif cipher_type == "2":
         vigenere_string = vigenere_decrypt(message_decrypt, key_decrypt)
+        load_table(file_name, message_decrypt, key_decrypt, vigenere_string)
         return vigenere_string
     elif cipher_type == "3":
         one_pad_string = one_time_pad_decr(message_decrypt, key_decrypt) 
+        load_table(file_name, message_decrypt, key_decrypt, one_pad_string)
         return one_pad_string
     else:
         print("Please write a valid input, 1, 2 or 3.")
@@ -112,6 +121,19 @@ def convert_to_list(string):
             return None
     return message
 
+def load_table(file_name, message, key, result):
+    data = [message, key, result]
+
+    # Specify the file path where you want to export the CSV file
+
+    # Write data to CSV file
+    with open(file_name, 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerows(data)
+
+    print(f'CSV file exported successfully to {file_name}')
+    
+
 if __name__ == "__main__":
     print("Welcome to our encryption and decryption program! Enter E to encryt and D to decrypt.")
     mode_type = input()
@@ -119,13 +141,4 @@ if __name__ == "__main__":
     print(secret_message)
 
 
-"""
-# My personal testing. Feel free to delete or change. 
-message = input("Write message: ")
-key = input("Write key of the same length as the message: ")
-print(one_time_pad_encr(message, key))
 
-decryption = input("Encrypted Message: ")
-key = input("Key: ")
-print("The message is: " + one_time_pad_decr(decryption, key))\
-"""

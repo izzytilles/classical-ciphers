@@ -1,4 +1,5 @@
 # from main import convert_to_list # TODO remove when convert to list becomes an external thing
+import string
 
 """
 Converts a string to a list
@@ -56,12 +57,10 @@ def vigenere_encr(message, key):
         message_value = space_handler(char)
         key_value = space_handler(key[n]) 
         encrypyt_char = ((message_value + key_value) % 27) + 65
-        # if (encrypt_char == " "):
-            #TODO change this to return a string and not a list!!!!!
         cipher_text.append(chr(encrypyt_char))
         n+=1
-    # cipher_text = string(cipher_text)
-    return cipher_text
+    final_encr = "".join(cipher_text)
+    return final_encr
 
 """ 
 This is the reverse space function. 
@@ -102,4 +101,5 @@ def vigenere_decrypt(message, key):
         decrypyt_char = ((message_val - key_value) % 27) + 65
         plain_text.append(chr(decrypyt_char))
         n+=1
-    return plain_text
+    final_decr = "".join(plain_text)
+    return final_decr
