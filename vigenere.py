@@ -25,8 +25,6 @@ def vigenere_encr(message, key):
     cipher_text = []
     length = len(message)
     key_length = len(key)
-    #message = convert_to_list(message)
-    #key = convert_to_list(key)
     n = 0
 
     # fail gracefully if the key is longer than the message
@@ -41,18 +39,18 @@ def vigenere_encr(message, key):
         if (ord(message[i]) < 65 and ord(message[i]) != 32) or ord(message[i]) > 90:
             return None
         
-        if n >= key_length:
+        if n >= key_length: #checks to make sure if the key is in bounds since message > key
             n = 0
         char = message[i]
         message_value = space_handler(char)
         key_value = space_handler(key[n]) 
-        encrypyt_char = ((message_value + key_value) % 27) + 65
+        encrypyt_char = ((message_value + key_value) % 27) + 65 #encryption
         if encrypyt_char == ord('['):
-            cipher_text.append(' ')
+            cipher_text.append(' ') #if its 91 then append a space (acts as 0-27)
         else:
-            cipher_text.append(chr(encrypyt_char))
+            cipher_text.append(chr(encrypyt_char)) # if anything else that's valid append char
         n+=1
-    final_encr = "".join(cipher_text)
+    final_encr = "".join(cipher_text) # convert to string and return to main
     return final_encr
 
 """ 
@@ -64,7 +62,7 @@ Output: the number ascii value
     
 """
 def reverse_space(char):
-    if (char == '['):
+    if (char == '['): 
         return 91    
     else:
         return ord(char) - ord('A')
@@ -79,24 +77,23 @@ Output: the decrypted message in a list form
 """
 def vigenere_decrypt(message, key):
     plain_text = []
-    #message = convert_to_list(message)
-    #key = convert_to_list(key)
     length = len(message)
     key_length = len(key)
     n = 0
+
     if key_length > length:
         return None
     for i in range(length):
         if n >= key_length:
             n = 0
         char = message[i]
-        message_val = reverse_space(char) #need to figure out how to deal with spaces
-        key_value = reverse_space(key[n])
-        decrypyt_char = ((message_val - key_value) % 27) + 65
+        message_val = reverse_space(char) #checks if it is a ] or not and adjusts if it is
+        key_value = reverse_space(key[n]) 
+        decrypyt_char = ((message_val - key_value) % 27) + 65 #decryption calculations
         if decrypyt_char == ord('['):
             plain_text.append(' ')
         else:
             plain_text.append(chr(decrypyt_char))
         n+=1
-    final_decr = "".join(plain_text)
+    final_decr = "".join(plain_text) #converts decryption to string and returns
     return final_decr

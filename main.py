@@ -30,7 +30,6 @@ def get_mode_choice(mode_type):
         choice = get_mode_choice(mode_type)
         return choice
 
-#TODO ciphertexts need to be saved to a FILE as well
 """ 
 This is the Get mode choice encrypt function. 
 This function directs users to the workflow for the cipher that they want to use and takes in the necessary
@@ -173,18 +172,15 @@ Prints output to the csv file ciphers.csv
 Input: file name, message, key, and the result of the encryption/decryption
 Output: output is written in the cipher.csv file
 """
-
 def load_table(file_name, message, key, result):
     data = [[message], [key], [result]]
-
-    # Specify the file path where you want to export the CSV file
 
     # Write data to CSV file
     with open(file_name, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerows(data)
 
-    print(f'CSV file exported successfully to {file_name}')
+    print(f'Message, key, and encryption/decryption exported successfully to {file_name}')
     
 
 if __name__ == "__main__":
