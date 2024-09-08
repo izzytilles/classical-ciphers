@@ -57,7 +57,10 @@ def vigenere_encr(message, key):
         message_value = space_handler(char)
         key_value = space_handler(key[n]) 
         encrypyt_char = ((message_value + key_value) % 27) + 65
-        cipher_text.append(chr(encrypyt_char))
+        if encrypyt_char == ord('['):
+            cipher_text.append(' ')
+        else:
+            cipher_text.append(chr(encrypyt_char))
         n+=1
     final_encr = "".join(cipher_text)
     return final_encr
@@ -99,7 +102,10 @@ def vigenere_decrypt(message, key):
         message_val = reverse_space(char) #need to figure out how to deal with spaces
         key_value = reverse_space(key[n])
         decrypyt_char = ((message_val - key_value) % 27) + 65
-        plain_text.append(chr(decrypyt_char))
+        if decrypyt_char == ord('['):
+            plain_text.append(' ')
+        else:
+            plain_text.append(chr(decrypyt_char))
         n+=1
     final_decr = "".join(plain_text)
     return final_decr
