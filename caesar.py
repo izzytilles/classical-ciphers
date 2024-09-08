@@ -6,24 +6,25 @@ Input: The user message they would like to encrypt and the character they would 
 Output: The encrypted message.
 """
 def caesar_enc(message_input, key_input):
-#Changing inputs to ascii values
+#Initializing message list
     message = []
-    #Handling lower case
+    #Handling lowercase and incorrect key cases
     if len(key_input) > 1:
         return None
     key_input = key_input.upper()
+    #getting ascii for the key
     key = ord(key_input) - ord('A')
-    #Encrypting the message
     for i in message_input:
-
         val = ord(i)
         #Changing the space value
         if val == 32:
             val = 91
+        #Checking for special characters
         elif val < 65 or val > 90:
             return None
-
+        #Encrypting the message
         val = ((((val - ord('A')) + key) % 27) + ord('A'))
+        #Handlig the spaces
         if val == ord('['):
             letter = ' '
         else:
@@ -43,19 +44,23 @@ Output: The decrypted message.
 """
 def caesar_dec(message_input, key_input):
     message = []
-    #Handling lower case
+    #Handling lowercase and incorrect key cases
     if len(key_input) > 1:
         return None
     key_input = key_input.upper()
+    #Changing key into ascii
     key = ord(key_input) - ord('A')
-    #decrypting
     for i in message_input:
         val = ord(i)
+        #Handling spaces
         if val == 32:
             val = 91
+        #Handling special characters
         elif val < 65 or val > 90:
             return None
+        #Decrypting message
         val = ((val - ord('A') - key + 27) % 27) + ord('A')
+        #Handling space cases
         if val == ord('['):
             letter = ' '
         else:
