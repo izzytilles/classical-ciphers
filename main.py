@@ -152,7 +152,7 @@ def convert_to_list(string):
     return message
 
 def load_table(file_name, message, key, result):
-    data = [message, key, result]
+    data = [[message], [key], [result]]
 
     # Specify the file path where you want to export the CSV file
 
