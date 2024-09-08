@@ -96,8 +96,8 @@ def get_choice_encrypt(cipher_type):
     else:
         print("Please write a valid input, 1, 2 or 3.")
         cipher_type = input()
-        get_choice_encrypt()
-
+        choice = get_choice_encrypt(cipher_type)
+    return choice
 """ 
 This is the Get choice decrypt function. 
 This function directs users to the workflow for the cipher that they want to use and takes in the necessary
