@@ -43,7 +43,7 @@ def test_one_time_pad_encr_lower():
 
     result = one_time_pad_encr(encr_message, key)
 
-    assert result == ["TIOTO", "MEDIA"] # returns a tuple
+    assert result == None
 
 def test_one_time_pad_decr():
     decr_message = "TIOTO"
@@ -59,7 +59,7 @@ def test_one_time_pad_decr_lower():
 
     result = one_time_pad_decr(decr_message, key)
 
-    assert result == "HELLO"
+    assert result == None
 
 def test_caesar_encr():
     encr_message = "A"
@@ -91,7 +91,7 @@ def test_caesar_encr_lower():
 
     result = caesar_enc(encr_message, key)
 
-    assert result == "X"
+    assert result == None
 
 # def test_space_handler():
 
@@ -109,7 +109,7 @@ def test_vignere_encr_lower():
 
     result = vigenere_encr(encr_message, key)
 
-    assert result == "JEDNO" 
+    assert result == None 
 
 def test_vigenere_decr():
     decr_message = "JEDNO"

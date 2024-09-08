@@ -13,10 +13,13 @@ def caesar_enc(message_input, key_input):
     key = ord(key_input) - ord('A')
     #Encrypting the message
     for i in message_input:
+
         val = ord(i)
         #Changing the space value
         if val == 32:
             val = 91
+        elif val < 65 or val > 90:
+            return None
 
         val = ((((val - ord('A')) + key) % 27) + ord('A'))
         if val == ord('['):
@@ -46,6 +49,8 @@ def caesar_dec(message_input, key_input):
         val = ord(i)
         if val == 32:
             val = 91
+        elif val < 65 or val > 90:
+            return None
         val = ((val - ord('A') - key + 27) % 27) + ord('A')
         if val == ord('['):
             letter = ' '

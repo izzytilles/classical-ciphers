@@ -1,24 +1,3 @@
-# from main import convert_to_list # TODO remove when convert to list becomes an external thing
-import string
-
-"""
-Converts a string to a list
-Input: a string
-Output: the list of capitalized characters
-        If the input has an unacceptable character, it will return None
-"""
-def convert_to_list(string):
-    message = []
-    for k in range(len(string)):
-        if string[k] == " ":                                             # If the message is a space
-            message.append(" ")
-        elif ord(string[k]) > 96 and ord(string[k]) < 123:         # If the message is lower case 
-            message.append(string[k].upper())
-        elif ord(string[k]) > 64 and ord(string[k]) < 91:         # If the message is in upper case
-            message.append(string[k])
-        else:
-            return None
-    return message
 
 """ 
 This is the space handler function. 
@@ -50,7 +29,18 @@ def vigenere_encr(message, key):
     #key = convert_to_list(key)
     n = 0
 
+    # fail gracefully if the key is longer than the message
+    if len(key) > len(message):
+        return None
+    for k in range(key_length):
+        if (ord(key[k]) < 65 and ord(key[k]) != 32) or ord(key[k])> 90:
+            return None
+
     for i in range(length):
+        # fail gracefully if the message contains anything other than a capitalized letter or space
+        if (ord(message[i]) < 65 and ord(message[i]) != 32) or ord(message[i]) > 90:
+            return None
+        
         if n >= key_length:
             n = 0
         char = message[i]

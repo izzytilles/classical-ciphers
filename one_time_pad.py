@@ -1,23 +1,3 @@
-# from main import convert_to_list # TODO remove when convert to list becomes an external thing
-
-"""
-Converts a string to a list
-Input: a string
-Output: the list of capitalized characters
-        If the input has an unacceptable character, it will return None
-"""
-def convert_to_list(string):
-    message = []
-    for k in range(len(string)):
-        if string[k] == " ":                                             # If the message is a space
-            message.append(" ")
-        elif ord(string[k]) > 96 and ord(string[k]) < 123:         # If the message is lower case 
-            message.append(string[k].upper())
-        elif ord(string[k]) > 64 and ord(string[k]) < 91:         # If the message is in upper case
-            message.append(string[k])
-        else:
-            return None
-    return message
 
 """ 
 This is the One Time Pad Encryption Function. 
@@ -29,25 +9,22 @@ Output: the encrypted message and the key (with some words labeling each)
 
 """
 def one_time_pad_encr(message, key):
-    
-    # Frist we make sure that the lengths of the message and key match
-    #length = len(message_input)     # We will use this later so it gets its own variable
-    #if length != len(key_input):
-    #    return None
-    
-    # We want to make sure the message and key are in capital letters and do not contain special characters
-    #message = convert_to_list(message_input)            # This is the version of the message in capital letters
-    #if message == None:
-    #    return None
-    #key = convert_to_list(key_input)                # This is the version of the key in capital letters
-    #if key == None:
-    #    return None
+    # We assume we were passed a list
+
+    # First we make sure that the lengths of the message and key match
+    length = len(message)     
+    if length != len(key):
+        return None
 
     encr = []                               # This is the encrypted message that we will output
 
     # This for loop adds the key letter to the associated letter in the message to encrypt it, and then appends the encrypted letter to the encrypted message 
     for i in range(len(message)):                 
         
+        # This fails gracefully if the list has any characters other than upper case letters and spaces
+        if (ord(message[i]) < 65 and ord(message[i]) != 32) or ord(message[i]) > 90 or (ord(key[i]) < 65 and ord(key[i]) != 32) or ord(key[i])> 90:
+            return None
+
         # If the "letter" of the message is a space
         if message[i] == " ":
             letter_encr = (26 + ord(key[i]) - 65) % 27 + 65      # 26 is our decided value for a space, ord() changes the value to be the ASCII number value, we subtract 65 to get the key down to our 0-26 range, we mod by 27 to make sure that the total remains below 27, we add 65 to get it back to the correct ASCII value
@@ -81,15 +58,6 @@ Output: the decrypted message
 
 """
 def one_time_pad_decr(encr, key):
-    # Change the input encryption message into a list of characters
-    #encr = convert_to_list(encr_mess)
-    #if encr == None:
-    #    return None
-    
-    # Change the input key into a list of characters. Will capitalize the lower case letters.
-    #key = convert_to_list(key_in)
-    #if key == None:
-    #    return None
     
     # initialize our descryption list
     decr = []
@@ -101,6 +69,9 @@ def one_time_pad_decr(encr, key):
 
     # This for loop decrypts the message
     for i in range(len(encr)):                 
+        # This fails gracefully if the list has any characters other than upper case letters and spaces
+        if (ord(encr[i]) < 65 and ord(encr[i]) != 32) or ord(encr[i]) > 90 or (ord(key[i]) < 65 and ord(key[i]) != 32) or ord(key[i])> 90:
+            return None        
         
         # If the "letter" of the encrypted message is a space
         if encr[i] == " ":
