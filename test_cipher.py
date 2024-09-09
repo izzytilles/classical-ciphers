@@ -66,7 +66,7 @@ def test_one_time_pad_encr():
 
     result = one_time_pad_encr(encr_message, key)
 
-    assert result == ["TIOTO", "MEDIA"] # returns a tuple
+    assert result == "TIOTO" 
 
 # test to ensure that one time pad encryption works with spaces
 def test_one_time_pad_encr_spaces():
@@ -75,7 +75,7 @@ def test_one_time_pad_encr_spaces():
 
     result = one_time_pad_encr(encr_message, key)
 
-    assert result == ["TIOTOMQOBEH", "MEDIANVALUE"] # returns a tuple
+    assert result == "TIOTOMQOBEH"
 
 # test to ensure that one time pad encyption will not run with lower case input
 def test_one_time_pad_encr_lower():

@@ -44,7 +44,7 @@ def one_time_pad_encr(message, key):
     final_encrypt = "".join(encr)
     final_key = "".join(key)
 
-    return  [final_encrypt, final_key]
+    return  "".join(encr)
 
 
 """ 
