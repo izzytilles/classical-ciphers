@@ -22,6 +22,7 @@ def caesar_enc(message_input, key_input):
         #Checking for special characters
         elif val < 65 or val > 90:
             return None
+        print(i, " + ", key_input, " % 27 = ", end="")
         #Encrypting the message
         val = ((((val - ord('A')) + key) % 27) + ord('A'))
         #Handlig the spaces
@@ -29,6 +30,7 @@ def caesar_enc(message_input, key_input):
             letter = ' '
         else:
             letter = chr(val)
+        print(letter)
         message.append(letter)
     #Making string
     encr = ''.join(message)
@@ -58,6 +60,7 @@ def caesar_dec(message_input, key_input):
         #Handling special characters
         elif val < 65 or val > 90:
             return None
+        print(i, " - ", key_input, " % 27 = ", end="")
         #Decrypting message
         val = ((val - ord('A') - key + 27) % 27) + ord('A')
         #Handling space cases
@@ -66,6 +69,7 @@ def caesar_dec(message_input, key_input):
         else:
             letter = chr(val)
         message.append(letter)
+        print(letter)
     #Creating return string
     decr = ''.join(message)
     return decr

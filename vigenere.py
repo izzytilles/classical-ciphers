@@ -42,13 +42,16 @@ def vigenere_encr(message, key):
         if n >= key_length: #checks to make sure if the key is in bounds since message > key
             n = 0
         char = message[i]
+        print(char, " + ", key[n], " % 27 = ", end="")
         message_value = space_handler(char)
         key_value = space_handler(key[n]) 
         encrypyt_char = ((message_value + key_value) % 27) + 65 #encryption
         if encrypyt_char == ord('['):
             cipher_text.append(' ') #if its 91 then append a space (acts as 0-27)
+            print(' ')
         else:
             cipher_text.append(chr(encrypyt_char)) # if anything else that's valid append char
+            print(chr(encrypyt_char))
         n+=1
     final_encr = "".join(cipher_text) # convert to string and return to main
     return final_encr
@@ -87,13 +90,16 @@ def vigenere_decrypt(message, key):
         if n >= key_length:
             n = 0
         char = message[i]
+        print(char, " - ", key[n], " % 27 = ", end="")
         message_val = reverse_space(char) #checks if it is a ] or not and adjusts if it is
         key_value = reverse_space(key[n]) 
         decrypyt_char = ((message_val - key_value) % 27) + 65 #decryption calculations
         if decrypyt_char == ord('['):
             plain_text.append(' ')
+            print(' ')
         else:
             plain_text.append(chr(decrypyt_char))
+            print(chr(decrypyt_char))
         n+=1
     final_decr = "".join(plain_text) #converts decryption to string and returns
     return final_decr
