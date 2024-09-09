@@ -47,8 +47,10 @@ def vigenere_encr(message, key):
         encrypyt_char = ((message_value + key_value) % 27) + 65 #encryption
         if encrypyt_char == ord('['):
             cipher_text.append(' ') #if its 91 then append a space (acts as 0-27)
+            print(message[i]+ " + " + key[n] + " = space")
         else:
             cipher_text.append(chr(encrypyt_char)) # if anything else that's valid append char
+            print(message[i] + " + " + key[n] + " = " + chr(encrypyt_char))
         n+=1
     final_encr = "".join(cipher_text) # convert to string and return to main
     return final_encr
@@ -92,8 +94,10 @@ def vigenere_decrypt(message, key):
         decrypyt_char = ((message_val - key_value) % 27) + 65 #decryption calculations
         if decrypyt_char == ord('['):
             plain_text.append(' ')
+            print(message[i]+ " - " + key[n] + " = space")
         else:
             plain_text.append(chr(decrypyt_char))
+            print(message[i] + " - " + key[n] + " = " + chr(decrypyt_char))
         n+=1
     final_decr = "".join(plain_text) #converts decryption to string and returns
     return final_decr
