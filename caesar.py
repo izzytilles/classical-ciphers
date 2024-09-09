@@ -28,6 +28,7 @@ def caesar_enc(message_input, key_input):
         #Handlig the spaces
         if val == ord('['):
             letter = ' '
+            print(i + " + " + key_input + " = space")
         else:
             letter = chr(val)
         print(letter)
@@ -66,8 +67,10 @@ def caesar_dec(message_input, key_input):
         #Handling space cases
         if val == ord('['):
             letter = ' '
+            print(i + " - " + key_input + " = space")
         else:
             letter = chr(val)
+            print(i + " - " + key_input + " = " + chr(val))
         message.append(letter)
         print(letter)
     #Creating return string
