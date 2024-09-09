@@ -68,6 +68,15 @@ def test_one_time_pad_encr():
 
     assert result == ["TIOTO", "MEDIA"] # returns a tuple
 
+# test to ensure that one time pad encryption works with spaces
+def test_one_time_pad_encr_spaces():
+    encr_message = "HELLO WORLD"
+    key = "MEDIANVALUE"
+
+    result = one_time_pad_encr(encr_message, key)
+
+    assert result == ["TIOTOMQOBEH", "MEDIANVALUE"] # returns a tuple
+
 # test to ensure that one time pad encyption will not run with lower case input
 def test_one_time_pad_encr_lower():
     encr_message = "hello"
@@ -86,12 +95,21 @@ def test_one_time_pad_decr():
 
     assert result == "HELLO"
 
+# test to ensure that one time pad decryption works with spaces
+def test_one_time_pad_decr_spaces():
+    decr_message = "TIOTOMQOBEH"
+    key = "MEDIANVALUE"
+
+    result = one_time_pad_decr(decr_message, key)
+
+    assert result == "HELLO WORLD"
+
 # test to ensure that one time pad decryption will not run with lower case input
 def test_one_time_pad_decr_lower():
     decr_message = "tioto"
     key = "media"
 
-    result = one_time_pad_decr(convert_to_list(decr_message), key)
+    result = one_time_pad_decr(decr_message, key)
 
     assert result == None
 
@@ -158,6 +176,15 @@ def test_vigenere_encr():
 
     assert result == "JEDNO" 
 
+# test to ensure that vigenere encryption works with spaces
+def test_vigenere_encrypt_spaces():
+    encr_message = "HELLO WORLD"
+    key = "CAT"
+
+    result = vigenere_encr(encr_message, key)
+
+    assert result == "JEDNOSYOJND" 
+
 # test to ensure that vigenere encryption doesn't work with lowercase input
 def test_vigenere_encr_lower():
     encr_message = "hello"
@@ -176,6 +203,15 @@ def test_vigenere_decr():
 
     assert result == "HELLO"
 
+# test to ensure that vigenere decryption works with spaces
+def test_vigenere_encrypt_spaces():
+    encr_message = "JEDNOSYOJND"
+    key = "CAT"
+
+    result = vigenere_decrypt(encr_message, key)
+
+    assert result == "HELLO WORLD" 
+
 # test to ensure that vigenere encryption doesn't work if the key is longer than the word to be encrypted
 def test_vigenere_encr_long_key():
     encr_message = "cat"
@@ -191,5 +227,22 @@ def test_vigenere_decr_long_key():
     key = "hello"
 
     result = vigenere_decrypt(decr_message, key)
+
+    assert result == None
+
+# test to ensure that a lowercase and uppercase mixed string with a space is properly converted to list with only uppercase letters
+def test_convert_string_to_list():
+    string = "hello WORLD"
+    converted_list = ["H", "E", "L", "L", "O", " ", "W", "O", "R", "L", "D"]
+
+    result = convert_to_list(string)
+
+    assert result == converted_list
+
+# test to ensure that a list with an unacceptable character will return None
+def test_convert_bad_string_to_list():
+    string = "hello, WORLD"
+
+    result = convert_to_list(string)
 
     assert result == None
